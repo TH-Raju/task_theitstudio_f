@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import EditModal from "../EditModal";
 // import { useQuery } from "@tanstack/react-query";
 
 const Table = ({ tasks, refetch }) => {
+  const [selectedTasks, setSelectedTasks] = useState([]);
   const handleDeleteUser = (task) => {
     // console.log("Delete", task);
     fetch(`http://localhost:5000/api/v1/task/${task._id}`, {
@@ -20,16 +21,39 @@ const Table = ({ tasks, refetch }) => {
         }
       });
   };
+
+  const handleCheckboxChange = (taskId) => {
+    setSelectedTasks((prevSelectedTasks) => {
+      // Check if the task ID is already in the array
+      const isTaskSelected = prevSelectedTasks.includes(taskId);
+
+      if (isTaskSelected) {
+        // If selected, remove it from the array
+        const updatedArray = prevSelectedTasks.filter((id) => id !== taskId);
+        // console.log(updatedArray); // Log the array when a checkbox is deselected
+        return updatedArray;
+      } else {
+        // If not selected, add it to the array
+        const updatedArray = [...prevSelectedTasks, taskId];
+        // console.log(updatedArray); // Log the array when a checkbox is selected
+        return updatedArray;
+      }
+    });
+  };
+
+  //   const select = () => {
+  //     console.log(selectedTasks);
+  //   };
   return (
     <div>
-      <h1>Table Data</h1>
+      {selectedTasks?.length >= 1 && <h1> {selectedTasks.length} Selected</h1>}
       <div className="overflow-x-auto pb-20">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
+              <th className="">
+                <label className="hidden">
                   <input type="checkbox" className="checkbox" />
                 </label>
               </th>
@@ -48,7 +72,12 @@ const Table = ({ tasks, refetch }) => {
               <tr>
                 <th>
                   <label>
-                    <input type="checkbox" className="checkbox" />
+                    <input
+                      type="checkbox"
+                      onClick={() => handleCheckboxChange(task._id)}
+                      checked={selectedTasks.includes(task._id)}
+                      className="checkbox"
+                    />
                   </label>
                 </th>
                 <td>{i + 1}</td>
