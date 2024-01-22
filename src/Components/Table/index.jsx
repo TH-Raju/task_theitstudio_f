@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import EditModal from "../EditModal";
 import { FaEye } from "react-icons/fa";
+import { LuSendHorizonal } from "react-icons/lu";
 
 const Table = ({ tasks, refetch }) => {
   const [selectedTasks, setSelectedTasks] = useState([]);
@@ -41,9 +42,9 @@ const Table = ({ tasks, refetch }) => {
     });
   };
 
-  //   const select = () => {
-  //     console.log(selectedTasks);
-  //   };
+  const send = () => {
+    toast.error("Node mailer isn't used for paid purpose!");
+  };
   return (
     <div>
       {selectedTasks?.length >= 1 && <h1> {selectedTasks.length} Selected</h1>}
@@ -63,6 +64,7 @@ const Table = ({ tasks, refetch }) => {
               <th>Email</th>
               <th>Hobby</th>
               <th>Option</th>
+              <th>Send</th>
               <th></th>
             </tr>
           </thead>
@@ -107,10 +109,11 @@ const Table = ({ tasks, refetch }) => {
                     </div>
                   </dialog>
                 </td>
+
                 <th>
-                  <div className="border border-blue-700 rounded-lg">
+                  <div className=" rounded-lg">
                     <div className="dropdown ">
-                      <label tabIndex={0} className="btn m-1 btn-xs">
+                      <label tabIndex={0} className="btn btn-info btn-xs">
                         option
                       </label>
                       <ul
@@ -119,7 +122,7 @@ const Table = ({ tasks, refetch }) => {
                       >
                         <li>
                           <button
-                            className="btn btn-primary btn-sm"
+                            className="btn btn-primary btn-sm hover:text-black"
                             // onClick={() => handleMakeUser(task._id)}
                             onClick={() =>
                               document.getElementById(task?._id).showModal()
@@ -146,6 +149,11 @@ const Table = ({ tasks, refetch }) => {
                     </div>
                   </div>
                 </th>
+                <td>
+                  <button onClick={() => send()}>
+                    <LuSendHorizonal />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
