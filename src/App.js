@@ -1,4 +1,5 @@
 import AddForm from "./Components/AddForm";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           + Add New Task
         </button>
       </div>
-      <AddForm id={"my_modal_5"}/>
+      <AddForm id={"my_modal_5"} />
+      <Home />
     </div>
   );
 }

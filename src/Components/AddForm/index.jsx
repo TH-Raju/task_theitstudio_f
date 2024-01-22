@@ -32,7 +32,6 @@ const AddForm = ({ id }) => {
   };
   return (
     <div>
-      <h1>Add New Data {id}</h1>
       <dialog
         id="my_modal_5"
         className="modal modal-bottom sm:modal-middle text-black"
@@ -46,9 +45,7 @@ const AddForm = ({ id }) => {
             className="mx-auto mb-0 mt-3 max-w-md space-y-4"
           >
             <div>
-              <label
-                className={`block  my-2 font-bold`}
-              >
+              <label className={`block  my-2 font-bold`}>
                 Name <span className="text-red-600">*</span>
               </label>
               <div className="relative">
@@ -61,9 +58,7 @@ const AddForm = ({ id }) => {
               </div>
             </div>
             <div>
-              <label
-                className={`block  my-2 font-bold`}
-              >
+              <label className={`block  my-2 font-bold`}>
                 Phone Number <span className="text-red-600">*</span>
               </label>
               <div className="relative">
@@ -77,9 +72,7 @@ const AddForm = ({ id }) => {
             </div>
 
             <div>
-              <label
-                className={`block my-2 font-bold`}
-              >
+              <label className={`block my-2 font-bold`}>
                 Email <span className="text-red-600">*</span>
               </label>
               <div className="relative">
@@ -93,9 +86,7 @@ const AddForm = ({ id }) => {
             </div>
 
             <div>
-              <label
-                className={`block my-2 font-bold`}
-              >
+              <label className={`block my-2 font-bold`}>
                 Hobbies <span className="text-red-600">*</span>
               </label>
               <div className="relative">
