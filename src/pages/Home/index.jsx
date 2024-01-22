@@ -1,11 +1,11 @@
 import React from "react";
 import Table from "../../Components/Table";
 
-const Home = () => {
+const Home = ({tasks, refetch}) => {
   return (
     <div>
       <h1>Home</h1>
-      <Table />
+      <Table tasks={tasks} refetch={refetch} />
     </div>
   );
 };

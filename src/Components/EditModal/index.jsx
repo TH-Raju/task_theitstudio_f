@@ -1,13 +1,17 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 
-const AddForm = ({ id, refetch }) => {
+const EditModal = ({ id, task, refetch }) => {
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = async (data) => {
+
+  const onSubmit = (data) => {
     // console.log(data);
-    fetch("http://localhost:5000/api/v1/task/create", {
-      method: "POST",
+    // console.log(id);
+    fetch(`http://localhost:5000/api/v1/task/update/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -15,30 +19,24 @@ const AddForm = ({ id, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         if (data.success) {
-          console.log(data);
-          toast.success("Task Added Successfully.");
-          document.getElementById("my_modal_5").close();
-          refetch();
-          reset();
-        } else {
-          toast.error("Can't added Task");
+          document.getElementById(id).close();
+          toast.success("updated successfully");
         }
+        refetch();
+        reset();
       });
   };
+
   return (
     <div>
-      <dialog
-        id="my_modal_5"
-        className="modal modal-bottom sm:modal-middle text-black"
-      >
+      <dialog id={id} className="modal modal-bottom sm:modal-middle text-black">
         <div className="modal-box">
-          <h3 className="font-bold text-lg text-black">Set your Hobby</h3>
+          <h3 className="font-bold text-lg text-black">Update your Hobby</h3>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            action=""
             className="mx-auto mb-0 mt-3 max-w-md space-y-4"
           >
             <div>
@@ -48,7 +46,7 @@ const AddForm = ({ id, refetch }) => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Enter Your Name"
+                  defaultValue={task?.name}
                   {...register("name", { required: true })}
                   className="w-full border  px-4 py-3 rounded-md border-gray-700 bg-white text-black focus:dark:border-violet-400"
                 />
@@ -61,7 +59,7 @@ const AddForm = ({ id, refetch }) => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Enter Your Phone Number"
+                  defaultValue={task?.phone}
                   {...register("phone", { required: true })}
                   className="w-full border  px-4 py-3 rounded-md border-gray-700 bg-white text-black focus:dark:border-violet-400"
                 />
@@ -75,7 +73,7 @@ const AddForm = ({ id, refetch }) => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Enter Your Email"
+                  defaultValue={task?.email}
                   {...register("email", { required: true })}
                   className="w-full border  px-4 py-3 rounded-md border-gray-700 bg-white text-black focus:dark:border-violet-400"
                 />
@@ -89,7 +87,7 @@ const AddForm = ({ id, refetch }) => {
               <div className="relative">
                 <textarea
                   type="text"
-                  placeholder="Write your Hobby"
+                  defaultValue={task?.hobbies}
                   {...register("hobbies", { required: true })}
                   className="w-full border  px-4 py-3 rounded-md border-gray-700 bg-white text-black focus:dark:border-violet-400"
                 />
@@ -101,12 +99,12 @@ const AddForm = ({ id, refetch }) => {
                 type="submit"
                 className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white hover:bg-blue-900 duration-150"
               >
-                Create
+                Update
               </button>
               <div className="modal-action">
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
-                  <button className="btn btn-warning">Close</button>
+                  <button className="btn btn-warning">Cancel</button>
                 </form>
               </div>
             </div>
@@ -117,4 +115,4 @@ const AddForm = ({ id, refetch }) => {
   );
 };
 
-export default AddForm;
+export default EditModal;
