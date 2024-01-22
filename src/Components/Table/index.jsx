@@ -93,12 +93,12 @@ const Table = ({ tasks, refetch }) => {
                   <button
                     className="btn btn-sm"
                     onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
+                      document.getElementById(task?._id).showModal()
                     }
                   >
                     <FaEye />
                   </button>
-                  <dialog id="my_modal_3" className="modal">
+                  <dialog id={task?._id} className="modal">
                     <div className="modal-box">
                       <form method="dialog">
                         <button className="btn bg-yellow-300 btn-sm btn-circle btn-ghost absolute right-2 top-2">
