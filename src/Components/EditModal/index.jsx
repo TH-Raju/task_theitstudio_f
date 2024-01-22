@@ -10,13 +10,16 @@ const EditModal = ({ id, task, refetch }) => {
   const onSubmit = (data) => {
     // console.log(data);
     // console.log(id);
-    fetch(`http://localhost:5000/api/v1/task/update/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://task-theitstudio-backend-ozb62nwnw-th-raju.vercel.app/api/v1/task/update/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

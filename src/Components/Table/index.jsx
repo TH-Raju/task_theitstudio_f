@@ -8,12 +8,15 @@ const Table = ({ tasks, refetch }) => {
   const [selectedTasks, setSelectedTasks] = useState([]);
   const handleDeleteUser = (task) => {
     // console.log("Delete", task);
-    fetch(`http://localhost:5000/api/v1/task/${task._id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://task-theitstudio-backend-ozb62nwnw-th-raju.vercel.app/api/v1/task/${task._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

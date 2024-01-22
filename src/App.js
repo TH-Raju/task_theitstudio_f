@@ -7,7 +7,9 @@ function App() {
   const { data: tasks = [], refetch } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/api/v1/task");
+      const res = await fetch(
+        "https://task-theitstudio-backend-ozb62nwnw-th-raju.vercel.app/api/v1/task"
+      );
       const data = await res.json();
       return data?.data;
     },
@@ -26,7 +28,7 @@ function App() {
         </button>
       </div>
       <Toaster />
-      <AddForm id={"my_modal_5"} refetch={refetch}/>
+      <AddForm id={"my_modal_5"} refetch={refetch} />
       <Home tasks={tasks} refetch={refetch} />
     </div>
   );

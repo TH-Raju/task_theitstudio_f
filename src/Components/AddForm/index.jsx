@@ -6,13 +6,16 @@ const AddForm = ({ id, refetch }) => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
     // console.log(data);
-    fetch("http://localhost:5000/api/v1/task/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      "https://task-theitstudio-backend-ozb62nwnw-th-raju.vercel.app/api/v1/task/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
