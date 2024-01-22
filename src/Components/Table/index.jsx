@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import EditModal from "../EditModal";
-// import { useQuery } from "@tanstack/react-query";
+import { FaEye } from "react-icons/fa";
 
 const Table = ({ tasks, refetch }) => {
   const [selectedTasks, setSelectedTasks] = useState([]);
@@ -84,7 +84,29 @@ const Table = ({ tasks, refetch }) => {
                 <td>{task.name}</td>
                 <td>{task?.phone}</td>
                 <td>{task?.email}</td>
-                <td>{task?.hobbies}</td>
+                <td>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() =>
+                      document.getElementById("my_modal_3").showModal()
+                    }
+                  >
+                    <FaEye />
+                  </button>
+                  <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button className="btn bg-yellow-300 btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <h3 className="font-bold text-lg">
+                        {task?.name}'s Hobby
+                      </h3>
+                      <p className="py-4">{task?.hobbies}</p>
+                    </div>
+                  </dialog>
+                </td>
                 <th>
                   <div className="border border-blue-700 rounded-lg">
                     <div className="dropdown ">
